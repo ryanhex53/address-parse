@@ -18,6 +18,10 @@ var _area = require('../area');
 
 var _area2 = _interopRequireDefault(_area);
 
+var _areaZip = require('../area-zip');
+
+var _areaZip2 = _interopRequireDefault(_areaZip);
+
 var _utils = require('./utils');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -80,6 +84,9 @@ var ParseAddress = function () {
             _result.name = _result.name.trim();
             ParseAddress.parseName(_result, { firstName: firstName });
             ParseAddress.handlerDetail(_result);
+            if (!_result.zip_code && _result.code) {
+              _result.zip_code = _areaZip2.default[_result.code] || '';
+            }
           }
         } catch (err) {
           _didIteratorError = true;

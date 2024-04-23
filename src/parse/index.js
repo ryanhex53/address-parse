@@ -4,6 +4,7 @@
  * By www.asseek.com
  */
 import AREA from '../area';
+import AREAZIPCODE from '../area-zip';
 import Utils from './utils';
 import ParseArea from './parse-area';
 
@@ -53,6 +54,9 @@ class ParseAddress {
         result.name = result.name.trim();
         ParseAddress.parseName(result, {firstName});
         ParseAddress.handlerDetail(result);
+        if (!result.zip_code && result.code) {
+          result.zip_code = AREAZIPCODE[result.code] || '';
+        }
       }
       if (!results.length) {
         let result = Object.assign(this.result, {
@@ -177,4 +181,3 @@ export {
 };
 
 export default new ParseAddress();
-
